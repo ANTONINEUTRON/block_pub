@@ -13,22 +13,22 @@ const navItems = {
     w: '64px',
   },
   '/access-book': {
-    name: 'access book',
+    name: 'open',
     x: 64,
     y: 35,
-    w: '65px',
+    w: '63px',
   },
   '/publish': {
     name: 'publish',
     x: 127,
     y: 69,
-    w: '56px',
+    w: '68px',
   },
   '/about': {
     name: 'about',
     x: 182,
     y: 104,
-    w: '100px',
+    w: '65x',
   },
 };
 

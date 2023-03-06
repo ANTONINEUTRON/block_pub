@@ -155,6 +155,32 @@ self.__RSC_MANIFEST={
         ],
         "async": false
       }
+    },
+    "(app-client)/./app/publish/page.jsx": {
+      "": {
+        "id": "(sc_client)/./app/publish/page.jsx",
+        "name": "",
+        "chunks": [
+          "app/publish/page:app/publish/page"
+        ],
+        "async": false
+      },
+      "*": {
+        "id": "(sc_client)/./app/publish/page.jsx",
+        "name": "*",
+        "chunks": [
+          "app/publish/page:app/publish/page"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./app/publish/page.jsx",
+        "name": "default",
+        "chunks": [
+          "app/publish/page:app/publish/page"
+        ],
+        "async": false
+      }
     }
   },
   "__edge_ssr_module_mapping__": {},
@@ -449,6 +475,32 @@ self.__RSC_MANIFEST={
       "name": "default",
       "chunks": [
         "app/layout:app/layout"
+      ],
+      "async": false
+    }
+  },
+  "/Users/antoni/web_projects/block_pub/block_pub/app/publish/page.jsx": {
+    "": {
+      "id": "(app-client)/./app/publish/page.jsx",
+      "name": "",
+      "chunks": [
+        "app/publish/page:app/publish/page"
+      ],
+      "async": false
+    },
+    "*": {
+      "id": "(app-client)/./app/publish/page.jsx",
+      "name": "*",
+      "chunks": [
+        "app/publish/page:app/publish/page"
+      ],
+      "async": false
+    },
+    "default": {
+      "id": "(app-client)/./app/publish/page.jsx",
+      "name": "default",
+      "chunks": [
+        "app/publish/page:app/publish/page"
       ],
       "async": false
     }
