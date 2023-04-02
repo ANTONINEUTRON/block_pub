@@ -1,11 +1,17 @@
 import { CircularProgress } from "@mui/joy";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import Modal from '@mui/joy/Modal';
+import ModalClose from '@mui/joy/ModalClose';
+import Typography from '@mui/joy/Typography';
+import Sheet from '@mui/joy/Sheet';
 import { toast } from "react-toastify";
 const Web3 = require('web3');
 import contract_interface from "../../contract/contract_interface";
 
 export default function MintForm(){
+    const [open, setOpen] = useState(false);
+
     const [bookTitle, setBookTitle] = useState('');
     const [abstract, setAbstract] = useState('');
     const [authorName, setAuthorName] = useState(null);
@@ -13,13 +19,15 @@ export default function MintForm(){
     const [coverImage, setCoverImage] = useState(null);
     const [bookFile, setBookFile] = useState(null);
     const [submitClicked, setSubmitClicked] = useState(false);
+    const bookId = useRef(null);
     const coverImageIpfsUrl = useRef(null);
     const bookFileIpfsUrl = useRef(null);
     const metadataUrl = useRef(null);
     const accountAddress = useRef(null);
+    const contractAddress = "0xEC640b95bcD3085c62a6954005Bde75E3Ea0bA5a";
 
     var bookObj = {};
-
+    const formRef = useRef(null);
 
     const handleSubmission = async (event)=>{
         event.preventDefault();
@@ -36,17 +44,7 @@ export default function MintForm(){
             await publishBook();
         }
         
-        
-        // 
-
-        // 
-
-        //get file url and append to SC
-        //show processing modal
-        //connect wallet
-        //deploy SC
-        //once everything is done setSubmitClicked to false
-        setSubmitClicked(false);
+        resetValues();
     }
 
     const createAndUploadMetadata = async ()=>{
@@ -109,7 +107,7 @@ export default function MintForm(){
             }
         });
 
-        const hash = `ipfs://${resFile.data.IpfsHash}`;
+        const hash = `https://ipfs.io/ipfs/${resFile.data.IpfsHash}`;
         console.log(hash);
         urlRef.current = hash;
     }
@@ -136,26 +134,17 @@ export default function MintForm(){
         console.log("got in price is "+price);
         const web3 = new Web3(window.ethereum);//"https://sepolia.infura.io/v3/4ad42ae08eda4cf1a111f06ce98fd8ea");//
 
-        const contractAddress = "0x8f7AC1B737313cED8c63abd39541f9a621a6D38b";
-
         const contract = new web3.eth.Contract(contract_interface.contractAbi, contractAddress);
 
-        // contract.deploy({
-        //         data: contract_interface.contractBytecode, 
-        //         arguments: [bookTitle, authorName, coverImageIpfsUrl, bookFileIpfsUrl, price]
-        //     }).send({gas: '4000000', from: accountAddress.current})
-        //     .on('error',(error)=>showError("An Error Occured "+error.message))
-        //     .then((newContract)=>{
-        //         const address = newContract.options.address;  
-        //         console.log('address:', address);
-        //         console.log(newContract);
-        //     });
-
         await contract.methods
-            .publishBook(metadataUrl.current, web3.utils.toWei(price, 'ether'))
+            .publishBook(metadataUrl.current, web3.utils.toWei(String(price), 'ether'))
             .send({from: accountAddress.current})
             .then(txHash => {
                 console.log(txHash);
+                let eventValues = txHash.events.bookPublished.returnValues;
+                bookId.current = eventValues.bookId;
+                
+                setOpen(true);
             })
             .catch(error => {
                 showError(error);
@@ -167,11 +156,61 @@ export default function MintForm(){
         setSubmitClicked(false);
     }
 
+    const resetValues = ()=>{
+        formRef.current.reset();
+        setSubmitClicked(false);
+    }
 
     return (
         <>
+            <Modal
+                aria-labelledby="modal-title"
+                aria-describedby="modal-desc"
+                open={open}
+                onClose={() => setOpen(false)}
+                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            >
+                <Sheet
+                variant="outlined"
+                sx={{
+                    maxWidth: 500,
+                    borderRadius: 'md',
+                    p: 3,
+                    boxShadow: 'lg',
+                }}
+                >
+                <ModalClose
+                    variant="outlined"
+                    sx={{
+                    top: 'calc(-1/4 * var(--IconButton-size))',
+                    right: 'calc(-1/4 * var(--IconButton-size))',
+                    boxShadow: '0 2px 12px 0 rgba(0 0 0 / 0.2)',
+                    borderRadius: '50%',
+                    bgcolor: 'background.body',
+                    }}
+                />
+                <Typography
+                    component="h2"
+                    id="modal-title"
+                    level="h4"
+                    textColor="inherit"
+                    fontWeight="lg"
+                    mb={1}
+                >
+                    Your book titled "{bookTitle}" has been published successfully!
+                </Typography>
+                <Typography id="modal-desc" textColor="text.tertiary">
+                    <strong>The Book ID is: {bookId.current}</strong> <b></b>
+                    <br/>
+                    <br/>
+                </Typography>
+                <div className="flex justify-center">
+                    <button className="text-xl font-bold bg-neutral-200 px-5 py-2 rounded-xl hover:bg-neutral-500">Open Book</button>
+                </div>
+                </Sheet>
+            </Modal>
             <div>
-                <form onSubmit={handleSubmission} className="my-5">
+                <form ref={formRef} onSubmit={handleSubmission} className="my-5">
                     <input type="text" onChange={(e)=>setBookTitle(e.target.value)} placeholder="Book Title" className="textfield w-full p-2 rounded-md mt-2" required/>
                     
                     <input type="text" placeholder="Author's Name"  onChange={(e)=>setAuthorName(e.target.value)} className="textfield w-full p-2 rounded-md mt-2" required/>
