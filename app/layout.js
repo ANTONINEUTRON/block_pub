@@ -2,6 +2,7 @@ import './globals.css';
 import Sidebar from '../components/sidebar';
 import ToastCont from '@/components/toast_cont';
 import Head from 'next/head';
+import { usePathname } from 'next/navigation';
 
 export const metadata = {
   title: 'Create Next App',

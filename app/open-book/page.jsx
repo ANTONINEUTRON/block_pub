@@ -1,5 +1,5 @@
 
-export default function MintBook(){
+export default function OpenPage(){
     return (
         <>
             <div>

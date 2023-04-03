@@ -24,7 +24,7 @@ export default function MintForm(){
     const bookFileIpfsUrl = useRef(null);
     const metadataUrl = useRef(null);
     const accountAddress = useRef(null);
-    const contractAddress = "0xEC640b95bcD3085c62a6954005Bde75E3Ea0bA5a";
+    const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
 
     var bookObj = {};
     const formRef = useRef(null);
@@ -55,7 +55,8 @@ export default function MintForm(){
             external_url: "blockpub.com",
             authorAddress: accountAddress.current,//deployer address
             image: coverImageIpfsUrl.current,
-            book_url: bookFileIpfsUrl.current
+            book_url: bookFileIpfsUrl.current,
+            price: price
         };
         
         console.log(bookObj);
@@ -116,7 +117,6 @@ export default function MintForm(){
         if (window.ethereum) {
             try {
               const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-              console.log(accounts);
               accountAddress.current = accounts[0];
               //   setAccounts(accounts);
             } catch (error) {
@@ -130,8 +130,8 @@ export default function MintForm(){
           }
     }
 
-    const publishBook = async ()=>{
-        console.log("got in price is "+price);
+    const publishBook = async() => {
+        // console.log("got in price is "+price);
         const web3 = new Web3(window.ethereum);//"https://sepolia.infura.io/v3/4ad42ae08eda4cf1a111f06ce98fd8ea");//
 
         const contract = new web3.eth.Contract(contract_interface.contractAbi, contractAddress);

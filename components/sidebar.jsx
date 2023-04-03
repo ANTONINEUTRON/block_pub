@@ -12,7 +12,7 @@ const navItems = {
     y: 0,
     w: '64px',
   },
-  '/access-book': {
+  '/open-book': {
     name: 'open',
     x: 64,
     y: 35,
