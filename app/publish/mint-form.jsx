@@ -8,6 +8,8 @@ import Sheet from '@mui/joy/Sheet';
 import { toast } from "react-toastify";
 const Web3 = require('web3');
 import contract_interface from "../../contract/contract_interface";
+import { connectWallet } from "@/utils/wallet_helpers";
+import Link from "next/link";
 
 export default function MintForm(){
     const [open, setOpen] = useState(false);
@@ -33,15 +35,21 @@ export default function MintForm(){
         event.preventDefault();
         setSubmitClicked(true);
         //connect wallet to get user address
-        await connectWallet();
+        await connectWallet(accountAddress);
         if(accountAddress.current){
-            //upload book
-            await uploadBook();
-            //upload image
-            await uploadCover();
-            //upload metadata
-            await createAndUploadMetadata();
-            await publishBook();
+            try {
+                //upload book
+                await uploadBook();
+                //upload image
+                await uploadCover();
+                //upload metadata
+                await createAndUploadMetadata();
+                await publishBook();
+            } catch (error) {
+                console.log(error);
+                toast(error.message);
+                return;
+            }
         }
         
         resetValues();
@@ -111,23 +119,6 @@ export default function MintForm(){
         const hash = `https://ipfs.io/ipfs/${resFile.data.IpfsHash}`;
         console.log(hash);
         urlRef.current = hash;
-    }
-
-    const connectWallet = async ()=>{
-        if (window.ethereum) {
-            try {
-              const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-              accountAddress.current = accounts[0];
-              //   setAccounts(accounts);
-            } catch (error) {
-              if (error.code === 4001) {
-                // User rejected request
-                showError("You need to specify an account in order to complete this process")
-              }
-
-              showError("An error occured "+error.message);
-            }
-          }
     }
 
     const publishBook = async() => {
@@ -205,7 +196,9 @@ export default function MintForm(){
                     <br/>
                 </Typography>
                 <div className="flex justify-center">
+                    <Link href={'/open/'+bookId.current}>
                     <button className="text-xl font-bold bg-neutral-200 px-5 py-2 rounded-xl hover:bg-neutral-500">Open Book</button>
+                    </Link>
                 </div>
                 </Sheet>
             </Modal>
@@ -215,7 +208,7 @@ export default function MintForm(){
                     
                     <input type="text" placeholder="Author's Name"  onChange={(e)=>setAuthorName(e.target.value)} className="textfield w-full p-2 rounded-md mt-2" required/>
                     
-                    <input type="number" placeholder="Book Price in Ether [optional]"  onChange={(e)=>setPrice(e.target.value)} step=".01" className="textfield w-full p-2 rounded-md mt-2" />
+                    <input type="number" placeholder="Book Price in Ether [optional]"  onChange={(e)=>setPrice(e.target.value)} step=".0000000001" className="textfield w-full p-2 rounded-md mt-2" />
                     
                     <div className="mt-5">
                     <label className="text-sm font-semibold">Book Abstract</label>
