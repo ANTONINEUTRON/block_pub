@@ -12,8 +12,8 @@ const navItems = {
     y: 0,
     w: '64px',
   },
-  '/open-book': {
-    name: 'open',
+  '/explore': {
+    name: 'explore',
     x: 64,
     y: 35,
     w: '63px',
