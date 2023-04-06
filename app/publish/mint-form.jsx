@@ -208,7 +208,7 @@ export default function MintForm(){
                     
                     <input type="text" placeholder="Author's Name"  onChange={(e)=>setAuthorName(e.target.value)} className="textfield w-full p-2 rounded-md mt-2" required/>
                     
-                    <input type="number" placeholder="Book Price in Ether [optional]"  onChange={(e)=>setPrice(e.target.value)} step=".0000000001" className="textfield w-full p-2 rounded-md mt-2" />
+                    <input type="number" placeholder="Book Price in Ether [optional]" min="0.0000000001"  onChange={(e)=>setPrice(e.target.value)} step=".0000000001" className="textfield w-full p-2 rounded-md mt-2" />
                     
                     <div className="mt-5">
                     <label className="text-sm font-semibold">Book Abstract</label>

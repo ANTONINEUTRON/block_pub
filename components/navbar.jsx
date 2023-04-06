@@ -68,8 +68,7 @@ export default function Navbar({ fixed }) {
 
 function Logo() {
     return (
-      <Link aria-label="Lee Robinson" href="/">
-        <motion.svg
+      <motion.svg
           className="text-black dark:text-white h-[25px] md:h-[37px]"
           width="50"
           height="50"
@@ -106,6 +105,5 @@ function Logo() {
             fill="currentColor"
           /> */}
         </motion.svg>
-      </Link>
     );
   }
