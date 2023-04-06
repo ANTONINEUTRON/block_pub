@@ -8,11 +8,11 @@ export default function Navbar({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
-      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-200 dark:bg-[#111010] shadow-2xl mb-3">
+      <nav className="relative flex flex-wrap items-center justify-between px-2 bg-[#16145d]">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
-              className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+              className="text-sm font-bold leading-relaxed flex items-center mr-4 py-2 whitespace-nowrap uppercase text-white"
               href="/"
             >
               <Logo />
