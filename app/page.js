@@ -14,14 +14,24 @@ export default function Home() {
         <div className='w-full h-screen grid grid-cols-1 md:grid-cols-2 gap-2 bg-[#16145d]'>
           <div className='flex flex-col justify-center items-center'>
             <div className='ml-14 text-white'>
-              <div className='text-7xl'>ACCESS BOOKS ON BLOCKCHAIN</div>
-              <div className='text-lg'>Publish/Read books through blockchain by utilizing the power of NFTs</div>
+              <div className='text-5xl'>CREATE AND CONSUME BOOKS LIKE NEVER BEFORE</div>
+              <div className='text-lg'>Revolutionize Your Reading Experience with Blockchain-Backed Book Creation and Reading Platform </div>
             </div>
           </div>
           <div className='hidden md:flex justify-center items-center'>
             <Image src="/homeillu.jpg" width={500} height={500} alt="My Image" />
           </div>
         </div>
+      </section>
+
+      <section className='flex my-10 justify-center container dark:bg-gray-900 bg-gray-100 py-10 px-5 rounded-md md:w-2/3 md:mx-auto'>
+        <h1 className='text-4xl'>HOW IT WORKS</h1>
+        
+      </section>
+      
+      <section className='flex mb-10 justify-center container dark:bg-gray-900 bg-gray-100 py-10 px-5 rounded-md md:w-2/3 md:mx-auto'>
+        <h1 className='text-4xl'>RECENTLY PUBLISHED WORKS</h1>
+        
       </section>
     </>
   );

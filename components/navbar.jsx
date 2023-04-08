@@ -3,6 +3,8 @@
 import React from "react";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import WalletButton from "./wallet_button";
+import { FaBars } from 'react-icons/fa';
 
 export default function Navbar({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -10,7 +12,7 @@ export default function Navbar({ fixed }) {
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 bg-[#16145d]">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+          <div className="w-full relative flex justify-between md:w-auto md:static md:block md:justify-start">
             <Link
               className="text-sm font-bold leading-relaxed flex items-center mr-4 py-2 whitespace-nowrap uppercase text-white"
               href="/"
@@ -19,21 +21,22 @@ export default function Navbar({ fixed }) {
               BlockPub
             </Link>
             <button
-              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+              className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block md:hidden outline-none focus:outline-none"
               type="button"
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
               <i className="fas fa-bars"></i>
+              <FaBars/>
             </button>
           </div>
           <div
             className={
-              "lg:flex flex-grow items-center" +
+              "md:flex flex-grow items-center" +
               (navbarOpen ? " flex" : " hidden")
             }
             id="example-navbar-danger"
           >
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <ul className="flex flex-col md:flex-row list-none md:ml-auto">
               <li className="nav-item">
                 <Link
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
@@ -57,6 +60,9 @@ export default function Navbar({ fixed }) {
                 >
                   <span className="ml-2">Explore</span>
                 </Link>
+              </li>
+              <li className="nav-item">
+                <WalletButton />
               </li>
             </ul>
           </div>

@@ -1,16 +1,32 @@
-import { useState } from "react";
+import { AddressContext } from "@/context/address_context";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import { connectWallet } from "@/utils/wallet_helpers";
 
-/**
+/**onClick={(event)=>!walletAddress ? connectWallet : disconnectWallet}>
  * 
  * @returns button - when clicked toggles between connecting and disconnecting wallet
  */
-export default function WalletHandler(){
-    const [walletAddress,setWalletAddress] = useState("");
+export default function WalletButton(){
+    const addressRef = useContext(AddressContext);
+
+    useEffect(()=>{
+        console.log(addressRef.current);
+    }, [addressRef.current]);
+
+    const connectUserWallet = (event)=>{
+        if(addressRef.current == null){
+            connectWallet(addressRef);
+        }else{
+            toast("Wallet is already connected");
+        }
+    }
 
     return (
-        <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded  mt-4 md:mt-0"
-            onClick={(event)=>!walletAddress ? connectWallet : disconnectWallet}>
-            {!walletAddress ? (
+        <button className="inline-flex items-center bg-[#12104e] border-2 py-1 px-3 focus:outline-none rounded text-green-100 md:ml-10 mt-4 md:mt-0"
+            onClick={connectUserWallet}>
+            {addressRef.current == null ? (
                 <>
                 CONNECT WALLET
                 </>
@@ -18,22 +34,11 @@ export default function WalletHandler(){
             :
             (
                 <>
-                {truncate(wallet)}
+                {truncate(addressRef.current)}
                 </>
             )}
         </button>
     );
-}
-
-
-const connectWallet = (event)=>{
-    event.preventDefault();
-
-}
-
-const disconnectWallet = (event)=>{
-    event.preventDefault();
-
 }
 
 const truncate = (str)=>{

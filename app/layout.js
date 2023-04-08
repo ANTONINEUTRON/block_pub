@@ -4,6 +4,7 @@ import ToastCont from '@/components/toast_cont';
 import Head from 'next/head';
 import { usePathname } from 'next/navigation';
 import Navbar from '@/components/navbar';
+import AddressContextComp from '@/context/address_context';
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,14 +18,18 @@ export default function RootLayout({ children }) {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <body className="antialiased mb-40 lg:mx-auto">
-        <ToastCont />
-        <Navbar />
-        {/* <Sidebar /> */}
-        <main className="flex-auto min-w-0 flex flex-col md:px-0">
-          {children}
-        </main>
-      </body>
+
+      <AddressContextComp>
+        <body className="antialiased mb-0 lg:mx-auto">
+          <ToastCont />
+          <Navbar />
+          {/* <Sidebar /> */}
+          <main className="flex-auto min-w-0 flex flex-col md:px-0">
+            {children}
+          </main>
+          <footer className='flex justify-center mt-5'>&copy; Antoni, 2023</footer>
+        </body>
+      </AddressContextComp>
     </html>
   )
 }
