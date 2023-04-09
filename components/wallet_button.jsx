@@ -9,16 +9,16 @@ import { connectWallet } from "@/utils/wallet_helpers";
  * @returns button - when clicked toggles between connecting and disconnecting wallet
  */
 export default function WalletButton(){
-    const addressRef = useContext(AddressContext);
+    const {address, setAddress} = useContext(AddressContext);
 
     useEffect(()=>{
-        console.log(addressRef.current);
-    }, [addressRef.current]);
+        console.log(address);
+    }, [address]);
 
     const connectUserWallet = (event)=>{
-        if(addressRef.current == null){
-            connectWallet(addressRef);
-        }else{
+        if(address == null){
+            connectWallet(setAddress);
+        }else{ 
             toast("Wallet is already connected");
         }
     }
@@ -26,7 +26,7 @@ export default function WalletButton(){
     return (
         <button className="inline-flex items-center bg-[#12104e] border-2 py-1 px-3 focus:outline-none rounded text-green-100 md:ml-10 mt-4 md:mt-0"
             onClick={connectUserWallet}>
-            {addressRef.current == null ? (
+            {address == null ? (
                 <>
                 CONNECT WALLET
                 </>
@@ -34,7 +34,7 @@ export default function WalletButton(){
             :
             (
                 <>
-                {truncate(addressRef.current)}
+                {truncate(address)}
                 </>
             )}
         </button>
@@ -42,5 +42,5 @@ export default function WalletButton(){
 }
 
 const truncate = (str)=>{
-    return str.slice(0,4)+"......"+str.slice(str.length-4);
+    return str.slice(0,6)+"......"+str.slice(str.length-3);
 }

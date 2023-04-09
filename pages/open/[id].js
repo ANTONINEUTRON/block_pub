@@ -10,7 +10,6 @@ import Web3 from 'web3';
 import "./id.css";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useRef } from 'react';
-import { connectWallet } from '@/utils/wallet_helpers';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;

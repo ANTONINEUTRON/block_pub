@@ -25,7 +25,7 @@ export default function MintForm(){
     const coverImageIpfsUrl = useRef(null);
     const bookFileIpfsUrl = useRef(null);
     const metadataUrl = useRef(null);
-    const accountAddress = useRef(null);
+    const [accountAddress, setAddress] = useState(null);
     const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
 
     var bookObj = {};
@@ -35,8 +35,8 @@ export default function MintForm(){
         event.preventDefault();
         setSubmitClicked(true);
         //connect wallet to get user address
-        await connectWallet(accountAddress);
-        if(accountAddress.current){
+        await connectWallet(setAddress);
+        if(accountAddress){
             try {
                 //upload book
                 await uploadBook();
@@ -50,6 +50,8 @@ export default function MintForm(){
                 toast(error.message);
                 return;
             }
+        }else{
+            setSubmitClicked(false);
         }
         
         resetValues();
@@ -61,7 +63,7 @@ export default function MintForm(){
             description: abstract,
             author: authorName,
             external_url: "blockpub.com",
-            authorAddress: accountAddress.current,//deployer address
+            authorAddress: accountAddress,//deployer address
             image: coverImageIpfsUrl.current,
             book_url: bookFileIpfsUrl.current,
             price: price
@@ -129,7 +131,7 @@ export default function MintForm(){
 
         await contract.methods
             .publishBook(metadataUrl.current, web3.utils.toWei(String(price), 'ether'))
-            .send({from: accountAddress.current})
+            .send({from: accountAddress})
             .then(txHash => {
                 console.log(txHash);
                 let eventValues = txHash.events.bookPublished.returnValues;

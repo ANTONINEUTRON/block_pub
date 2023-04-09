@@ -23,7 +23,11 @@ export default function OpenPage(){
                 
                 {
                     books.length < 1
-                    ? (<CircularProgress />)
+                    ? (
+                        <div className="flex justify-center my-auto">
+                            <CircularProgress />
+                        </div>
+                    )
                     : (
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
                             {
@@ -31,10 +35,9 @@ export default function OpenPage(){
                                     (value, index)=>{
                                         // let metaData = value.metadata;
                                         return (
-                                            <Link href={"/open/"+value.token_id} className="hover:opacity-50" target="_blank">
-                                                <BookUI 
-                                                    metaData={JSON.parse(value.metadata)}/>
-                                            </Link>
+                                            <BookUI 
+                                                metaData={JSON.parse(value.metadata)}
+                                                bookUrl={"/open/"+value.token_id}/>
                                         )
                                     }
                                 )

@@ -1,14 +1,14 @@
 "use client";
-import { createContext, useRef } from "react"
+import { createContext, useRef, useState } from "react"
 
 
 export const AddressContext = createContext();
 
 export default function AddressContextComp({children}){
-    const address = useRef(null);
+    const [address,setAddress] = useState(null);
 
     return (
-        <AddressContext.Provider value={address}>
+        <AddressContext.Provider value={{address, setAddress}}>
             {children}
         </AddressContext.Provider>
     );
