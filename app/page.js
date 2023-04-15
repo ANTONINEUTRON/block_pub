@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
 import { Modal } from '@mui/joy';
+import RecentlyPublishedBooks from '@/components/recently_published_books';
+import Link from 'next/link';
+import { FaAngleRight } from 'react-icons/fa';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -55,8 +58,16 @@ export default function Home() {
       </section>
       
       <section className='relative mb-10 container dark:bg-gray-900 bg-gray-100 py-10 px-5 rounded-md md:w-5/6 md:mx-auto'>
-        <h1 className='text-4xl'>RECENTLY PUBLISHED WORKS</h1><hr className='w-10' /> <br/>
-        
+        <div className='flex justify-between align-middle'>
+          <div>
+            <h1 className='text-4xl'>RECENTLY PUBLISHED WORKS</h1><hr className='w-10' />
+          </div>
+          <div>
+            <Link href="/explore" className='flex justify-center align-middle'>More <FaAngleRight className='ml-2 my-auto'/> </Link>
+          </div>
+        </div>
+        <br/>
+        <RecentlyPublishedBooks />
       </section>
     </>
   );

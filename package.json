@@ -21,7 +21,6 @@
     "dotenv": "^16.0.3",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
-    "firebase": "^9.19.1",
     "framer-motion": "^10.0.2",
     "moralis": "^2.18.2",
     "next": "13.2.3",
