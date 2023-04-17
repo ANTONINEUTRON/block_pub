@@ -23,7 +23,7 @@ export default function BookUI({metaData, bookUrl}){
                     {metaData.author} 
                 </p>
                 <p className="text-sm">
-                    {metaData.price} Ether
+                    {metaData.price} ETH
                 </p>
                 <div className="mt-5">
                     <Link href={bookUrl} className="hover:opacity-50" target="_blank">

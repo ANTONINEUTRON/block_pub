@@ -24,7 +24,7 @@ export default function WalletButton(){
     }
 
     return (
-        <button className="inline-flex items-center bg-[#12104e] border-2 py-1 px-3 focus:outline-none rounded text-green-100 md:ml-10 mt-4 md:mt-0"
+        <button className="inline-flex items-center bg-[#12104e] border-2 py-1 px-3 focus:outline-none rounded hover:opacity-50 text-green-100 md:ml-10 mt-4 md:mt-0"
             onClick={connectUserWallet}>
             {address == null ? (
                 <>

@@ -12,6 +12,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { useRef } from 'react';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"
+import Head from 'next/head';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
@@ -103,6 +104,11 @@ export default function OpenBookWithId(){
 
     return (
         <div >
+            <Head>
+                <title>
+                    {grantAccess ? metadata.name : "Loading ..."}
+                </title>
+            </Head>
             <ToastCont />
             <div className='flex h-screen w-screen justify-center'>
                 {
