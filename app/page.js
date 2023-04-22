@@ -28,7 +28,7 @@ export default function Home() {
       </section>
 
       <section className='relative my-10 justify-center container dark:bg-gray-900 bg-gray-100 py-10 px-5 rounded-md md:w-4/5 md:mx-auto'>
-        <h1 className='text-4xl'>HOW IT WORKS</h1><hr className='w-10'/><br/>
+        <h1 className='text-4xl'>HOW IT WORKS</h1><hr className='w-10 bg-slate-800'/><br/>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-2'>
           <div className='flex justify-center'>
             <Image src="/homeillu.jpg" width={300} height={300} alt="My Image" />

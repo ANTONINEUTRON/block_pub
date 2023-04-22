@@ -5,9 +5,23 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import WalletButton from "./wallet_button";
 import { FaBars } from 'react-icons/fa';
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function Navbar({ fixed }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  var path = usePathname();
+  const [cPath,setPath] = useState(null);
+  useEffect(()=>{
+    console.log("path "+(path));
+    if(path){
+      setPath(path);
+    }
+  }, [path]
+  );
+
+
   return (
     <>
       <nav className="relative flex flex-wrap items-center justify-between px-2 bg-[#16145d]">
@@ -39,26 +53,26 @@ export default function Navbar({ fixed }) {
             <ul className="flex flex-col md:flex-row list-none md:ml-auto">
               <li className="nav-item">
                 <Link
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  className={"flex px-3 py-2 items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75 "+ (cPath === "/" ? "border-b-2" : "")}
                   href="/"
                 >
-                  <span className="ml-2">Home</span>
+                  <span className="mx-auto">Home</span>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  className={"flex px-3 py-2  items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75 "+ (cPath === "/publish" ? "border-b-2" : "")}
                   href="/publish"
                 >
-                  <span className="ml-2">Publish</span>
+                  <span className="mx-auto">Publish</span>
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  className={"flex px-3 py-2  items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75 "+ (cPath === "/explore" ? "border-b-2" : "")}
                   href="/explore"
                 >
-                  <span className="ml-2">Explore</span>
+                  <span className="mx-auto">Explore</span>
                 </Link>
               </li>
               <li className="nav-item">

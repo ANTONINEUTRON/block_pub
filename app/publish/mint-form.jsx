@@ -230,7 +230,7 @@ export default function MintForm(){
                     <div className="flex justify-center mt-10">
                     {submitClicked 
                         ? (<CircularProgress variant="solid" />) 
-                        : (<input type="submit" value="Publish" className="text-xl font-bold bg-neutral-200 dark:bg-neutral-700 px-5 py-2 rounded-xl hover:bg-neutral-500 hover:text-gray-900"/>)}
+                        : (<input type="submit" value="Publish" className="text-xl font-bold text-white bg-neutral-500 px-5 py-2 rounded-xl hover:bg-neutral-500 hover:text-gray-900"/>)}
                     </div>
                 </form>
             </div>
