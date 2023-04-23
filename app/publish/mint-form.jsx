@@ -17,7 +17,7 @@ export default function MintForm(){
     const [bookTitle, setBookTitle] = useState('');
     const [abstract, setAbstract] = useState('');
     const [authorName, setAuthorName] = useState(null);
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState("0");
     const [coverImage, setCoverImage] = useState(null);
     const [bookFile, setBookFile] = useState(null);
     const [submitClicked, setSubmitClicked] = useState(false);
@@ -48,6 +48,7 @@ export default function MintForm(){
             } catch (error) {
                 console.log(error);
                 toast(error.message);
+                setSubmitClicked(false);
                 return;
             }
         }else{
@@ -214,7 +215,7 @@ export default function MintForm(){
                     
                     <div className="mt-5">
                     <label className="text-sm font-semibold">Book Abstract</label>
-                    <textarea rows="4" className="textfield w-full p-2 rounded-md mt-2" placeholder="Enter Book Abstract Here" onChange={(e)=>setAbstract(e.target.value)}></textarea>
+                    <textarea rows="4" className="textfield w-full p-2 rounded-md mt-2" placeholder="Enter Book Abstract Here [optional]" onChange={(e)=>setAbstract(e.target.value)}></textarea>
                     </div>
                     
                     <div className="mt-5">

@@ -119,14 +119,14 @@ export default function OpenBookWithId(){
                         </div>
                     ): (
                         <div className=''>
-                            {/* <embed
+                            <embed
                                 src={metadata.book_url + "#toolbar=0"}
                                 type="application/pdf"
                                 height="100%"
-                                width="660"
+                                className='w-screen'
                                 onContextMenu={(e) => e.preventDefault()}
-                            /> */}
-                        <Document  
+                            />
+                        {/* <Document  
                             onLoadSuccess={onDocumentLoadSuccess}
                             file={metadata.book_url}  
                             onContextMenu={(e) => e.preventDefault()}
@@ -136,7 +136,7 @@ export default function OpenBookWithId(){
                             {Array.apply(null, Array(numPages))
                             .map((x, i)=>i+1)
                             .map(page => <Page pageNumber={page}/>)}
-                        </Document>
+                        </Document> */}
                         </div>
                     )
                 }

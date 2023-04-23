@@ -27,7 +27,7 @@ export default function BookUI({metaData, bookUrl}){
                 </p>
                 <div className="mt-5">
                     <Link href={bookUrl} className="hover:opacity-50" target="_blank">
-                        <button className="bg-blue-700 py-2 w-full px-10 rounded-xl">Read</button>
+                        <button className="bg-blue-700 text-white py-2 w-full px-10 rounded-xl">Read</button>
                     </Link>
                 </div>
                 {/*  */}

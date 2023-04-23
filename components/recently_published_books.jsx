@@ -12,7 +12,7 @@ export default function RecentlyPublishedBooks(){
     return (
         <div>
             {
-                books.length < 1
+                books == null || books.length < 1
                 ? (
                     <div className="flex justify-center">
                         <div>No Book Has Been Published</div>

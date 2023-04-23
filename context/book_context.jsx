@@ -8,7 +8,7 @@ const Moralis = require("moralis").default;
 export const BooksContext = createContext();
 
 export default function BooksContextComp({children}){
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState(null);
     const hasModuleStarted = useRef(false);
 
     useEffect(()=>{
@@ -32,7 +32,7 @@ export default function BooksContextComp({children}){
                 "address": process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
             });
             
-            // console.log(response.raw);
+            console.log(response.raw);
             setBooksFunc(response.raw.result);
         } catch (e) {
             console.error(e);

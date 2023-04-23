@@ -1,12 +1,9 @@
 "use client";
 import BookUI from "@/components/book_ui";
 import { BooksContext } from "@/context/book_context";
-import contract_interface from "@/contract/contract_interface";
 import { CircularProgress } from "@mui/joy";
-import Link from "next/link";
 import { useState } from "react";
 import { useContext } from "react";
-import Web3 from "web3";
 
 export default function OpenPage(){
     const [tokens, setTokens] = useState(null);
@@ -21,28 +18,38 @@ export default function OpenPage(){
                 </div>
                 
                 {
-                    books.length < 1
+                    books == null
                     ? (
                         <div className="flex justify-center my-auto">
                             <CircularProgress />
                         </div>
                     )
-                    : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
-                            {
-                                books.map(
-                                    (value, index)=>{
-                                        // let metaData = value.metadata;
-                                        return (
-                                            <BookUI 
-                                                metaData={JSON.parse(value.metadata)}
-                                                bookUrl={"/open/"+value.token_id}/>
+                    : (<div>
+                        {
+                            books.length > 0
+                            ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
+                                    {
+                                        books.map(
+                                            (value, index)=>{
+                                                // let metaData = value.metadata;
+                                                return (
+                                                    <BookUI 
+                                                        metaData={JSON.parse(value.metadata)}
+                                                        bookUrl={"/open/"+value.token_id}/>
+                                                )
+                                            }
                                         )
                                     }
-                                )
-                            }
-                            
-                            
+                                    
+                                    
+                                </div>
+                            ):(
+                                <div>
+                                    No Book Has Been Published
+                                </div>
+                            )
+                        }
                         </div>
                     )
                 }

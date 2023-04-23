@@ -1,6 +1,5 @@
 'use client';
 
-import React from "react";
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import WalletButton from "./wallet_button";
@@ -10,11 +9,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function Navbar({ fixed }) {
-  const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
   var path = usePathname();
   const [cPath,setPath] = useState(null);
   useEffect(()=>{
-    console.log("path "+(path));
     if(path){
       setPath(path);
     }
