@@ -21,6 +21,7 @@ export default function MintForm(){
     const [coverImage, setCoverImage] = useState(null);
     const [bookFile, setBookFile] = useState(null);
     const [submitClicked, setSubmitClicked] = useState(false);
+    const [txHash, setTxHash] = useState("");
     const bookId = useRef(null);
     const coverImageIpfsUrl = useRef(null);
     const bookFileIpfsUrl = useRef(null);
@@ -135,6 +136,7 @@ export default function MintForm(){
             .send({from: accountAddress})
             .then(txHash => {
                 console.log(txHash);
+                setTxHash(txHash.transactionHash);
                 let eventValues = txHash.events.bookPublished.returnValues;
                 bookId.current = eventValues.bookId;
                 
@@ -198,9 +200,12 @@ export default function MintForm(){
                     <br/>
                     <br/>
                 </Typography>
-                <div className="flex justify-center">
-                    <Link href={'/open/'+bookId.current}>
+                <div className="flex justify-between">
+                    <Link href={'/open/'+bookId.current} target='_blank'>
                     <button className="text-xl font-bold bg-neutral-200 px-5 py-2 rounded-xl hover:bg-neutral-500">Open Book</button>
+                    </Link>
+                    <Link href={'https://sepolia.etherscan.io/tx/'+txHash} target='_blank'>
+                    <button className="text-xl font-bold bg-neutral-200 px-5 py-2 rounded-xl hover:bg-neutral-500">View on Etherscan</button>
                     </Link>
                 </div>
                 </Sheet>

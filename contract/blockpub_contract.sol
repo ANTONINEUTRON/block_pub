@@ -11,6 +11,7 @@ contract BlockPubContract is ERC721, ERC721URIStorage, Ownable {
     mapping(uint256 => uint256) private priceMapping; //tokenId => price
 
     event bookPublished(uint256 bookId, address publisherAddress, string metadata);
+    event paymentMade(uint256 bookId, address payer);
 
     string private title;
 
@@ -35,6 +36,8 @@ contract BlockPubContract is ERC721, ERC721URIStorage, Ownable {
         (bool success,) = authorAddress.call{value: msg.value}("");
 
         require(success, "Payment transfer failed");
+
+        emit paymentMade(tokenId, msg.sender);
         
         recordPayment(tokenId, msg.sender);
     }

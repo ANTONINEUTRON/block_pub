@@ -6,10 +6,18 @@ import { Modal } from '@mui/joy';
 import RecentlyPublishedBooks from '@/components/recently_published_books';
 import Link from 'next/link';
 import { FaAngleRight } from 'react-icons/fa';
+import { useEffect } from 'react';
+import Web3 from 'web3';
+import contract_interface from '@/contract/contract_interface';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  useEffect(
+    ()=>{
+      
+    }
+  );
 
   return (
     <>
@@ -27,25 +35,26 @@ export default function Home() {
         </div>
       </section>
 
-      <section className='relative my-10 justify-center container dark:bg-gray-900 bg-gray-100 py-10 px-5 rounded-md md:w-4/5 md:mx-auto'>
+      <section className='relative my-10 justify-center container dark:bg-gray-900 bg-gray-100 py-10 px-5 rounded-md md:w-2/3 md:mx-auto'>
         <h1 className='text-4xl'>HOW IT WORKS</h1><hr className='w-10 bg-slate-800'/><br/>
-        <div className='grid grid-cols-1 md:grid-cols-4 gap-2'>
+        <div className='flex flex-col md:flex-row justify-around'>
           {/* <div className='flex justify-center'>
             <Image src="/homeillu.jpg" width={200} height={200} alt="My Image" />
           </div> */}
-          <div className='flex flex-col '>
+          <div className='flex flex-col m-4'>
             <h2 className='text-2xl font-mono'>Publishing</h2>
-            <ul className='mt-10 list-disc font-light'>
+            <ul className='mt-5 list-disc font-light'>
               <li>Fill in the book details</li>
               <li>Mint/Publish the book to the blockchain</li>
+              <li>Verify your book signature on the blockchain</li>
             </ul>
           </div>
           {/* <div className='flex justify-center'>
             <Image src="/homeillu.jpg" width={300} height={300} alt="My Image" />
           </div> */}
-          <div className='flex flex-col '>
+          <div className='flex flex-col m-4'>
             <h2 className='text-2xl font-mono'>Reading</h2>
-            <ul className='mt-10 list-disc font-light'>
+            <ul className='mt-5 list-disc font-light'>
               <li>Explore our catalog of published books</li>
               <li>Click on the 'Read' button</li>
               <li>Pay (if needed) and access the book</li>

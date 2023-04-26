@@ -13,6 +13,9 @@ import { useRef } from 'react';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"
 import Head from 'next/head';
+import { useContext } from 'react';
+import { AddressContext } from '@/context/address_context';
+import { connectWallet } from '@/utils/wallet_helpers';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
@@ -23,11 +26,7 @@ export default function OpenBookWithId(){
     const [grantAccess, setGrantAccess] = useState(false);
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
-    // const [web3, setWeb3] = useState(null);
-    // const [contract, setContract] = useState(null);
-    const userAddress = useRef(null);
-    // var web3 = null;
-    // var contract = null;
+    const [address, setAddress] = useState();
 
     useEffect(()=>{
         if(id==null)return;
@@ -50,6 +49,7 @@ export default function OpenBookWithId(){
     const getTokenUri = async ()=>{
         console.log("got in TO FETCH TOKEN ")
         toast("Loading The Book");
+        connectWallet(setAddress);
 
         const web3 = new Web3(window.ethereum);
         const contract = new web3.eth.Contract(contract_interface.contractAbi, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
@@ -79,28 +79,78 @@ export default function OpenBookWithId(){
     }
     
     const debitUserWallet = async ()=>{
+        const web3 = new Web3(window.ethereum);
+        const contract = new web3.eth.Contract(contract_interface.contractAbi, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
+
+        await contract.getPastEvents('paymentMade',{
+            fromBlock: 0,
+            toBlock: 'latest'
+        }, async function(error, events){
+            console.log("Past events:", events);
+            hasUserPaidBefore(events)
+            .then((value)=>{
+                console.log(value);
+                //debit user
+                if(!value){
+                    // contract.methods.makePaymentToAuthor(metadata.authorAddress, web3.utils.toWei(metadata.price, "ether"), id)
+                    // .send({from: address, value: web3.utils.toWei(metadata.price, "ether")})
+                    // .then((receipt) => {
+                    //     console.log(receipt); // logs the URI of the token with ID tokenId
+                    //     setGrantAccess(true);
+                    // })
+                    // .catch((error) => {
+                    //     toast(error.message);
+                    //     console.log(JSON.stringify(error)); // logs any errors that occurred during the call
+                    // });
+                }else{
+                    setGrantAccess(true);
+                }
+            });
+        });
+
+    }
+
+    const hasUserPaidBefore = async (events)=>{
+        for(var event of events){
+            let payerA = event.returnValues.payer.toLowerCase();
+            let payerB = address.toLowerCase();
+            if(payerA == payerB){
+                // setGrantAccess(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
         //get user address
         // await connectWallet(userAddress);
-        // const web3 = new Web3(window.ethereum);
-        // const contract = new web3.eth.Contract(contract_interface.contractAbi, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-        // //call on web3 to debit
-        // await contract.methods.makePaymentToAuthor(metadata.authorAddress, web3.utils.toWei(metadata.price, "ether"), id)
-        //     .send({from: userAddress.current, value: web3.utils.toWei(metadata.price, "ether")})
-        //     .then((receipt) => {
-        //         console.log(receipt); // logs the URI of the token with ID tokenId
-        //         setGrantAccess(true)
-        //     })
-        //     .catch((error) => {
-        //         toast(error.message);
-        //         console.log(JSON.stringify(error)); // logs any errors that occurred during the call
-        //     });
+        
+    // }
 
-        setGrantAccess(true);
-    }
+    // const userHasPaidBefore = async ()=>{
+    //     let toReturn = false;
+    //     //get payment events
+    //     //if events contains current address u have paid
+    //     /////loop through to check if an event has the curent user wallet address
+    //     //access chain and get events
+    //     const web3 = new Web3(window.ethereum);
+    //     const contract = new web3.eth.Contract(contract_interface.contractAbi, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
 
-    function onDocumentLoadSuccess({ numPages }) {
-       setNumPages(numPages);
-    }
+    //     await contract.getPastEvents('paymentMade',{
+    //         fromBlock: 0,
+    //         toBlock: 'latest'
+    //     }, function(error, events){
+    //         console.log("Past events:", events);
+    //         for(var event of events){
+    //             if(event.returnValues.payer == address){
+    //                 toReturn = true;
+    //                 return;
+    //             }
+    //         }
+    //     })
+
+    //     return toReturn;
+    // }
 
     return (
         <div >
@@ -126,17 +176,6 @@ export default function OpenBookWithId(){
                                 className='w-screen'
                                 onContextMenu={(e) => e.preventDefault()}
                             />
-                        {/* <Document  
-                            onLoadSuccess={onDocumentLoadSuccess}
-                            file={metadata.book_url}  
-                            onContextMenu={(e) => e.preventDefault()}
-                            className="pdf-container"
-                            renderMode="svg"
-                            renderTextLayer={false} >
-                            {Array.apply(null, Array(numPages))
-                            .map((x, i)=>i+1)
-                            .map(page => <Page pageNumber={page}/>)}
-                        </Document> */}
                         </div>
                     )
                 }
