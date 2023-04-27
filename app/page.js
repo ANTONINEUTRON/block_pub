@@ -1,5 +1,4 @@
 "use client";
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
 import { Modal } from '@mui/joy';
@@ -30,7 +29,7 @@ export default function Home() {
             </div>
           </div>
           <div className='hidden md:flex justify-center items-center'>
-            <Image src="/homeillu.jpg" width={500} height={500} alt="My Image" />
+            <img src="/homeillu.jpg" width={500} height={500} alt="My Image" />
           </div>
         </div>
       </section>
