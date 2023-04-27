@@ -11,7 +11,7 @@ export default function BookUI({metaData, bookUrl}){
         <div className="flex flex-col items-center lg:items-start lg:flex-row font-sans ">
             <div className="flex-none relative">
                     <img src={metaData.image} alt="Book image"
-                        className="inset-0 w-60 h-60 object-cover rounded-lg" loading="lazy" />
+                        className="inset-0 w-56 h-56 object-cover rounded-lg" loading="lazy" />
             </div>
             <div className="flex-auto p-6">
                 <div className="flex flex-wrap">

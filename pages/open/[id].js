@@ -87,16 +87,16 @@ export default function OpenBookWithId(){
                 console.log(value);
                 //debit user
                 if(!value){
-                    // contract.methods.makePaymentToAuthor(metadata.authorAddress, web3.utils.toWei(metadata.price, "ether"), id)
-                    // .send({from: address, value: web3.utils.toWei(metadata.price, "ether")})
-                    // .then((receipt) => {
-                    //     console.log(receipt); // logs the URI of the token with ID tokenId
-                    //     setGrantAccess(true);
-                    // })
-                    // .catch((error) => {
-                    //     toast(error.message);
-                    //     console.log(JSON.stringify(error)); // logs any errors that occurred during the call
-                    // });
+                    contract.methods.makePaymentToAuthor(metadata.authorAddress, web3.utils.toWei(metadata.price, "ether"), id)
+                    .send({from: address, value: web3.utils.toWei(metadata.price, "ether")})
+                    .then((receipt) => {
+                        console.log(receipt); // logs the URI of the token with ID tokenId
+                        setGrantAccess(true);
+                    })
+                    .catch((error) => {
+                        toast(error.message);
+                        console.log(JSON.stringify(error)); // logs any errors that occurred during the call
+                    });
                 }else{
                     setGrantAccess(true);
                 }
