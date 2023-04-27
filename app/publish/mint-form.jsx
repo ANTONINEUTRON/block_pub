@@ -193,7 +193,7 @@ export default function MintForm(){
                     fontWeight="lg"
                     mb={1}
                 >
-                    Your book titled "{bookTitle}" has been published successfully!
+                    Your book titled &#34{bookTitle}&#34 has been published successfully!
                 </Typography>
                 <Typography id="modal-desc" textColor="text.tertiary">
                     <strong>The Book ID is: {bookId.current}</strong> <b></b>

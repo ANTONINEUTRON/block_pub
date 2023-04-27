@@ -8,15 +8,10 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import Web3 from 'web3';
 import "./id.css";
-import { Document, Page, pdfjs } from "react-pdf";
-import { useRef } from 'react';
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"
 import Head from 'next/head';
-import { useContext } from 'react';
-import { AddressContext } from '@/context/address_context';
 import { connectWallet } from '@/utils/wallet_helpers';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
 export default function OpenBookWithId(){

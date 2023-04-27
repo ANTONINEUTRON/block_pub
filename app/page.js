@@ -56,7 +56,7 @@ export default function Home() {
             <h2 className='text-2xl font-mono'>Reading</h2>
             <ul className='mt-5 list-disc font-light'>
               <li>Explore our catalog of published books</li>
-              <li>Click on the 'Read' button</li>
+              <li>Click on the &#39Read&#39 button</li>
               <li>Pay (if needed) and access the book</li>
             </ul>
           </div>

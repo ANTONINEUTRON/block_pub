@@ -23,6 +23,7 @@ export default function RecentlyPublishedBooks(){
                             books.map((value, index)=>{
                                 return (
                                     <BookUI 
+                                        key={value.token_id}
                                         metaData={JSON.parse(value.metadata)}
                                         bookUrl={"/open/"+value.token_id}/>
                                 );

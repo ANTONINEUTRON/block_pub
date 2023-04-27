@@ -35,6 +35,7 @@ export default function OpenPage(){
                                                 // let metaData = value.metadata;
                                                 return (
                                                     <BookUI 
+                                                        key={value.token_id}
                                                         metaData={JSON.parse(value.metadata)}
                                                         bookUrl={"/open/"+value.token_id}/>
                                                 )

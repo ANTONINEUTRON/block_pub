@@ -14,7 +14,6 @@
     "@fontsource/public-sans": "^4.5.12",
     "@moralisweb3/common-evm-utils": "^2.18.2",
     "@mui/joy": "^5.0.0-alpha.72",
-    "@truffle/hdwallet-provider": "^2.1.9",
     "autoprefixer": "^10.4.13",
     "axios": "^1.3.4",
     "clsx": "^1.2.1",
