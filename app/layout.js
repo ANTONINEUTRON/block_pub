@@ -1,8 +1,6 @@
 import './globals.css';
-import Sidebar from '../components/sidebar';
 import ToastCont from '@/components/toast_cont';
 import Head from 'next/head';
-import { usePathname } from 'next/navigation';
 import Navbar from '@/components/navbar';
 import AddressContextComp from '@/context/address_context';
 import BooksContextComp from '@/context/book_context';
@@ -25,7 +23,6 @@ export default function RootLayout({ children }) {
           <body className="antialiased mb-0 lg:mx-auto">
             <ToastCont />
             <Navbar />
-            {/* <Sidebar /> */}
             <main className="flex-auto min-w-0 flex flex-col md:px-0">
               {children}
             </main>

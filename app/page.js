@@ -1,22 +1,12 @@
 "use client";
 import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-import { Modal } from '@mui/joy';
 import RecentlyPublishedBooks from '@/components/recently_published_books';
 import Link from 'next/link';
 import { FaAngleRight } from 'react-icons/fa';
-import { useEffect } from 'react';
-import Web3 from 'web3';
-import contract_interface from '@/contract/contract_interface';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  useEffect(
-    ()=>{
-      
-    }
-  );
 
   return (
     <>

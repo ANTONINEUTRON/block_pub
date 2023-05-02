@@ -2,11 +2,9 @@
 import BookUI from "@/components/book_ui";
 import { BooksContext } from "@/context/book_context";
 import { CircularProgress } from "@mui/joy";
-import { useState } from "react";
 import { useContext } from "react";
 
 export default function OpenPage(){
-    const [tokens, setTokens] = useState(null);
     const {books, setBooks} = useContext(BooksContext);
 
     return (

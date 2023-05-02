@@ -2,11 +2,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 export default function BookUI({metaData, bookUrl}){
-    // useEffect(()=>{
-    //     console.log("From Book UI");
-    //     console.log(metaData);
-    // }, [metaData]);
-
     return (
         <div className="flex flex-col items-center lg:items-start lg:flex-row font-sans ">
             <div className="flex-none relative">

@@ -19,8 +19,6 @@ export default function OpenBookWithId(){
     const { id } = router.query;
     const [metadata, setMetadata] = useState(null);
     const [grantAccess, setGrantAccess] = useState(false);
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
     const [address, setAddress] = useState();
 
     useEffect(()=>{
@@ -116,36 +114,6 @@ export default function OpenBookWithId(){
         }
         return false;
     }
-
-        //get user address
-        // await connectWallet(userAddress);
-        
-    // }
-
-    // const userHasPaidBefore = async ()=>{
-    //     let toReturn = false;
-    //     //get payment events
-    //     //if events contains current address u have paid
-    //     /////loop through to check if an event has the curent user wallet address
-    //     //access chain and get events
-    //     const web3 = new Web3(window.ethereum);
-    //     const contract = new web3.eth.Contract(contract_interface.contractAbi, process.env.NEXT_PUBLIC_CONTRACT_ADDRESS);
-
-    //     await contract.getPastEvents('paymentMade',{
-    //         fromBlock: 0,
-    //         toBlock: 'latest'
-    //     }, function(error, events){
-    //         console.log("Past events:", events);
-    //         for(var event of events){
-    //             if(event.returnValues.payer == address){
-    //                 toReturn = true;
-    //                 return;
-    //             }
-    //         }
-    //     })
-
-    //     return toReturn;
-    // }
 
     return (
         <div >
