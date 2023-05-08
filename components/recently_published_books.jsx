@@ -21,12 +21,14 @@ export default function RecentlyPublishedBooks(){
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1">
                         {
                             books.map((value, index)=>{
-                                return (
-                                    <BookUI 
-                                        key={value.token_id}
-                                        metaData={JSON.parse(value.metadata)}
-                                        bookUrl={"/open/"+value.token_id}/>
-                                );
+                                if(index < 3){
+                                    return (
+                                        <BookUI 
+                                            key={value.token_id}
+                                            metaData={JSON.parse(value.metadata)}
+                                            bookUrl={"/open/"+value.token_id}/>
+                                    );
+                                }
                             })
                         }
                     </div>
